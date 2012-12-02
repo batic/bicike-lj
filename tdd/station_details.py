@@ -1,6 +1,7 @@
 from datetime import datetime
 from bs4 import BeautifulSoup
 import urllib2
+import getinfo
 
 class StationDetails(object):
     """ A simple class for Station details data"""
@@ -14,6 +15,7 @@ class StationDetails(object):
         self.total = None
         self.empty = None
         self.time = None
+        self.name = self.get_name(i=self.id)
 
     def __eq__(self, other):
         return self.id == other.id and self.available == other.available and self.total == other.total and self.empty == other.empty and self.time == other.time
@@ -32,9 +34,11 @@ class StationDetails(object):
 
     def Print(self):
         print("Station id      = " + str(self.id))
+        print("Station name    = " )
         print("Available bikes = " + str(self.available))
         print("Empty locks     = " + str(self.empty))
         print("Total spaces    = " + str(self.total))
         print("Data retrieved  = " + str(self.time))
 
-
+    def get_name(self,i):
+        return getinfo.get_info(type='name',number=i)
